@@ -1,11 +1,19 @@
-import React from 'react';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { FoodsProvider } from "./hooks/useFoods";
+import { Routes } from "./routes";
 
-function App() {
+import GlobalStyle from "./styles/global";
+
+export const App = (): JSX.Element => {
   return (
-    <div className="App">
-      Hello
-    </div>
+    <FoodsProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Routes />
+      </BrowserRouter>
+    </FoodsProvider>
   );
-}
+};
 
 export default App;
