@@ -7,10 +7,10 @@ interface FoodProps {
   food: FoodFormat;
   handleDelete: (food: FoodFormat) => void;
   handleEditFood: (food: FoodFormat) => void;
+  setToggleAvailable: (food:FoodFormat, isAvailable: boolean) => void;
 }
 
-export function Food({ food, handleDelete, handleEditFood }: FoodProps) {
-  function toggleAvailable() {}
+export function Food({ food, handleDelete, handleEditFood, setToggleAvailable }: FoodProps) {
   return (
     <Container available={food.available}>
       <header>
@@ -52,7 +52,7 @@ export function Food({ food, handleDelete, handleEditFood }: FoodProps) {
               id={`available-switch-${food.id}`}
               type="checkbox"
               checked={food.available}
-              onChange={() => toggleAvailable}
+              onChange={() => setToggleAvailable(food, food.available)}
               data-testid={`change-status-food-${food.id}`}
             />
             <span  className="slider"/>
