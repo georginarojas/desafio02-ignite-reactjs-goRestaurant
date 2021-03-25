@@ -6,14 +6,20 @@ import { FoodFormat } from "../../types";
 import { FoodsContainer } from "./styles";
 
 export function Dashboard() {
-  const { foods } = useFoods();
-  console.log("DASHBOARD ", foods);
+  const { foods, toggleAvailable, deleteFood } = useFoods();
+//   console.log("DASHBOARD ", foods);
   function toggleModal() {}
 
-  function handleDeleteFood() {}
+  function handleDeleteFood(food : FoodFormat) {
+      deleteFood(food);
+  }
 
   function handleEditFood(food : FoodFormat) {
     //   console.log("FOOd **** ", food);
+  }
+
+  function handleToggleAvailable(food :FoodFormat, isAvailable : boolean){
+    toggleAvailable({food, isAvailable});
   }
 
   return (
@@ -26,6 +32,7 @@ export function Dashboard() {
             food={food}
             handleDelete={handleDeleteFood}
             handleEditFood={handleEditFood}
+            handleToggleAvailable={handleToggleAvailable}
           />
         ))}
       </FoodsContainer>

@@ -24,6 +24,7 @@ interface FoodsContextData {
     food,
     isAvailable,
   }: ToggleAvailableFormat) => Promise<void>;
+  deleteFood: (food: FoodFormat) => Promise<void>;
 }
 
 export const FoodsContext = createContext<FoodsContextData>(
@@ -59,8 +60,21 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
     }
   };
 
+  // -- Delete food
+  const deleteFood = async (food: FoodFormat) => {
+    try {
+      const response = await api.delete(`/foods/${food.id}`);
+      if(response.status === 200){
+        console.log(response);
+        setIsChange(!isChange);
+      }
+    } catch {
+      toast.error("Erro na remoção do produto");
+    }
+  };
+
   return (
-    <FoodsContext.Provider value={{ foods, toggleAvailable }}>
+    <FoodsContext.Provider value={{ foods, toggleAvailable, deleteFood}}>
       {children}
     </FoodsContext.Provider>
   );
