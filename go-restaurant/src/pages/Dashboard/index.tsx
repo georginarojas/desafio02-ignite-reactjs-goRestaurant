@@ -1,23 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Food } from "../../components/Food";
 import { Header } from "../../components/Header";
+import { ModalAddFood } from "../../components/ModalAddFood";
 import { useFoods } from "../../hooks/useFoods";
 import { FoodFormat } from "../../types";
 import { FoodsContainer } from "./styles";
 
 export function Dashboard() {
   const { foods, toggleAvailable, deleteFood } = useFoods();
-//   console.log("DASHBOARD ", foods);
-  function toggleModal() {}
+  const [isOpen, setIsOpen] = useState(false);
 
+
+  // -- Toggle Modal
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
+
+  // -- Delete food
   function handleDeleteFood(food : FoodFormat) {
       deleteFood(food);
   }
 
+  // -- Edit food
   function handleEditFood(food : FoodFormat) {
     //   console.log("FOOd **** ", food);
   }
 
+  // -- Toggle available
   function handleToggleAvailable(food :FoodFormat, isAvailable : boolean){
     toggleAvailable({food, isAvailable});
   }
@@ -25,6 +34,10 @@ export function Dashboard() {
   return (
     <>
       <Header openModal={toggleModal} />
+      <ModalAddFood 
+        isOpen={isOpen}
+        setIsOpen={toggleModal}
+        />
       <FoodsContainer>
         {foods.map((food) => (
           <Food
