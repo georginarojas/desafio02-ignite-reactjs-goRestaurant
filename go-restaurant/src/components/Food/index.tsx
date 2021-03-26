@@ -5,7 +5,7 @@ import { FiEdit3, FiTrash } from "react-icons/fi";
 
 interface FoodProps {
   food: FoodFormat;
-  handleDelete: (food: FoodFormat) => void;
+  handleDelete: (foodId: number) => void;
   handleEditFood: (food: FoodFormat) => void;
   handleToggleAvailable: (food:FoodFormat, isAvailable: boolean) => void;
 }
@@ -38,7 +38,7 @@ export function Food({ food, handleDelete, handleEditFood, handleToggleAvailable
           <button
             type="button"
             className="icon"
-            onClick={() => handleDelete(food)}
+            onClick={() => handleDelete(food.id)}
             data-testid={`edit-food-${food.id}`}
           >
             <FiTrash size={20} />
