@@ -7,37 +7,42 @@ import { FoodFormat } from "../../types";
 import { FoodsContainer } from "./styles";
 
 export function Dashboard() {
-  const { foods, toggleAvailable, deleteFood } = useFoods();
+  const { foods, toggleAvailable, deleteFood, addFood } = useFoods();
   const [isOpen, setIsOpen] = useState(false);
-
 
   // -- Toggle Modal
   function toggleModal() {
     setIsOpen(!isOpen);
   }
 
+  // -- Add food
+  function handleAddFood(food: FoodFormat) {
+    addFood(food);
+  }
+
   // -- Delete food
-  function handleDeleteFood(food : FoodFormat) {
-      deleteFood(food);
+  function handleDeleteFood(foodId: number) {
+    deleteFood(foodId);
   }
 
   // -- Edit food
-  function handleEditFood(food : FoodFormat) {
+  function handleEditFood(food: FoodFormat) {
     //   console.log("FOOd **** ", food);
   }
 
   // -- Toggle available
-  function handleToggleAvailable(food :FoodFormat, isAvailable : boolean){
-    toggleAvailable({food, isAvailable});
+  function handleToggleAvailable(food: FoodFormat, isAvailable: boolean) {
+    toggleAvailable({ food, isAvailable });
   }
 
   return (
     <>
       <Header openModal={toggleModal} />
-      <ModalAddFood 
+      <ModalAddFood
         isOpen={isOpen}
         setIsOpen={toggleModal}
-        />
+        handleAddFood={handleAddFood}
+      />
       <FoodsContainer>
         {foods.map((food) => (
           <Food

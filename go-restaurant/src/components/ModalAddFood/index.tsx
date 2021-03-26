@@ -3,16 +3,21 @@ import { Input } from "../Input";
 import { Modal } from "../Modal";
 import { Form } from "./styles";
 import { FiCheckSquare } from "react-icons/fi";
+import { FoodFormat } from "../../types";
 
 interface ModalAddFoodProps {
   isOpen: boolean;
   setIsOpen: () => void;
+  handleAddFood: (data: FoodFormat) => void;
 }
 
-export function ModalAddFood({ isOpen, setIsOpen }: ModalAddFoodProps) {
+export function ModalAddFood({ isOpen, setIsOpen, handleAddFood }: ModalAddFoodProps) {
   const formRef = useRef(null);
 
-  function handleSubmit() {}
+  function handleSubmit(data: FoodFormat) {
+    handleAddFood(data);
+    setIsOpen();
+  }
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
