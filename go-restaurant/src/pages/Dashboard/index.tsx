@@ -8,7 +8,13 @@ import { FoodFormat } from "../../types";
 import { FoodsContainer } from "./styles";
 
 export function Dashboard() {
-  const { foods, toggleAvailable, deleteFood, addFood } = useFoods();
+  const {
+    foods,
+    toggleAvailable,
+    deleteFood,
+    addFood,
+    updateFood,
+  } = useFoods();
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [editingFood, setEditingFood] = useState<FoodFormat>({} as FoodFormat);
@@ -34,7 +40,10 @@ export function Dashboard() {
   }
 
   // -- Update food
-  function handleUpdateFood(food: FoodFormat) {}
+  function handleUpdateFood(food: FoodFormat) {
+    const newFood = { ...editingFood, ...food };
+    updateFood(newFood);
+  }
 
   // -- Edit food
   function handleEditFood(food: FoodFormat) {

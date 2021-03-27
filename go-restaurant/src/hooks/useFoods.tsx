@@ -25,7 +25,8 @@ interface FoodsContextData {
     isAvailable,
   }: ToggleAvailableFormat) => Promise<void>;
   deleteFood: (foodId: number) => Promise<void>;
-  addFood: (food:FoodFormat) => Promise<void>;
+  addFood: (food: FoodFormat) => Promise<void>;
+  updateFood: (food: FoodFormat) => Promise<void>;
 }
 
 export const FoodsContext = createContext<FoodsContextData>(
@@ -34,12 +35,10 @@ export const FoodsContext = createContext<FoodsContextData>(
 
 export function FoodsProvider({ children }: FoodsProviderProps) {
   const [foods, setFoods] = useState<FoodFormat[]>([]);
-  const [editingFood, setEditingFood] = useState();
 
   useEffect(() => {
     api.get<FoodFormat[]>("foods").then((response) => setFoods(response.data));
   }, []);
-
 
   // -- Toggle Available --
   const toggleAvailable = async ({
@@ -52,15 +51,15 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
         available: !isAvailable,
       });
 
-      if(!response.data){
+      if (!response.data) {
         throw new Error();
       }
 
-      let index = foods.findIndex(el => el.id === food.id);
+      let index = foods.findIndex((el) => el.id === food.id);
       foods[index].available = !isAvailable;
       setFoods([...foods]);
     } catch {
-      toast.error("Erro no edição da comida");
+      toast.error("Erro no edição do prato");
     }
   };
 
@@ -68,36 +67,52 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
   const deleteFood = async (foodId: number) => {
     try {
       const response = await api.delete(`/foods/${foodId}`);
-      if(!response){
+      if (!response) {
         throw new Error();
       }
-      let newFoods = foods.filter(food => food.id !== foodId);
+      let newFoods = foods.filter((food) => food.id !== foodId);
       setFoods(newFoods);
     } catch {
-      toast.error("Erro na remoção da comida");
+      toast.error("Erro na remoção do prato");
     }
   };
 
-
   // -- Add a new food
-  const addFood = async (food:FoodFormat) => {
+  const addFood = async (food: FoodFormat) => {
     try {
       const response = await api.post("foods", {
         ...food,
         available: true,
-      })
-      if(!response){
+      });
+      if (!response) {
         throw new Error();
       }
       console.log("addFood ", food, response.data);
       setFoods([...foods, response.data]);
     } catch {
-      toast.error("Erro na adição de uma nova comida")
+      toast.error("Erro na adição de um novo prato");
     }
-  }
+  };
+
+  // -- Update a food --
+  const updateFood = async (food: FoodFormat) => {
+    try {
+      const response = await api.put(`/foods/${food.id}`, { ...food });
+      if (!response) {
+        throw new Error();
+      }
+      let index = foods.findIndex((el) => el.id === food.id);
+      foods[index] = food;
+      setFoods([...foods]);
+    } catch {
+      toast.error("Erro na edição do prato");
+    }
+  };
 
   return (
-    <FoodsContext.Provider value={{ foods, toggleAvailable, deleteFood, addFood}}>
+    <FoodsContext.Provider
+      value={{ foods, toggleAvailable, deleteFood, addFood, updateFood }}
+    >
       {children}
     </FoodsContext.Provider>
   );

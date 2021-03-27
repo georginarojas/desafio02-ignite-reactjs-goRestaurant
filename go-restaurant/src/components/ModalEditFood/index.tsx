@@ -22,6 +22,7 @@ export function ModalEditFood({
 
   const handleSubmit = (data: FoodFormat) => {
     handleUpdateFood(data);
+    setIsOpen();
   };
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
