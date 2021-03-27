@@ -1,4 +1,4 @@
-<h1 align="center" >RocketShoes</h1>
+<h1 align="center" >GoRestaurant</h1>
 
 <p align="center">
   <a href="#-description">Description</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
