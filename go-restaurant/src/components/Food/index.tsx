@@ -7,10 +7,15 @@ interface FoodProps {
   food: FoodFormat;
   handleDelete: (foodId: number) => void;
   handleEditFood: (food: FoodFormat) => void;
-  handleToggleAvailable: (food:FoodFormat, isAvailable: boolean) => void;
+  handleToggleAvailable: (food: FoodFormat, isAvailable: boolean) => void;
 }
 
-export function Food({ food, handleDelete, handleEditFood, handleToggleAvailable }: FoodProps) {
+export function Food({
+  food,
+  handleDelete,
+  handleEditFood,
+  handleToggleAvailable,
+}: FoodProps) {
   return (
     <Container available={food.available}>
       <header>
@@ -55,7 +60,7 @@ export function Food({ food, handleDelete, handleEditFood, handleToggleAvailable
               onChange={() => handleToggleAvailable(food, food.available)}
               data-testid={`change-status-food-${food.id}`}
             />
-            <span  className="slider"/>
+            <span className="slider" />
           </label>
         </div>
       </section>

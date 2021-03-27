@@ -87,7 +87,6 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
       if (!response) {
         throw new Error();
       }
-      console.log("addFood ", food, response.data);
       setFoods([...foods, response.data]);
     } catch {
       toast.error("Erro na adição de um novo prato");

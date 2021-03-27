@@ -11,7 +11,11 @@ interface ModalAddFoodProps {
   handleAddFood: (data: FoodFormat) => void;
 }
 
-export function ModalAddFood({ isOpen, setIsOpen, handleAddFood }: ModalAddFoodProps) {
+export function ModalAddFood({
+  isOpen,
+  setIsOpen,
+  handleAddFood,
+}: ModalAddFoodProps) {
   const formRef = useRef(null);
 
   function handleSubmit(data: FoodFormat) {
