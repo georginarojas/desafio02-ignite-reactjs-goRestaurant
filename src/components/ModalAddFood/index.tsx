@@ -26,13 +26,13 @@ export function ModalAddFood({
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Novo prato</h1>
+        <h1 data-testid='header-modal-add'>Novo prato</h1>
         <Input name="image" placeholder="Cole o link aqui" />
         <Input name="name" placeholder="Ex: Moda Italiana" />
         <Input name="price" placeholder="Ex: 19.90" />
         <Input name="description" placeholder="Descrição" />
 
-        <button type="submit" data-testid="add-food-button">
+        <button type="submit" data-testid="add-plate-button">
           <p className="text">Adicionar Prato</p>
           <div className="icon">
             <FiCheckSquare size={24} />

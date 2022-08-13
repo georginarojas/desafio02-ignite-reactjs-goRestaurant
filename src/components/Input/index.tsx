@@ -37,6 +37,7 @@ export const Input = ({ name, icon: Icon, ...rest }: InputProps) => {
     <Container isFilled={isFilled} isFocused={isFocused}>
       {Icon && <Icon size={20} />}
       <input
+        data-testid={name}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         defaultValue={defaultValue}

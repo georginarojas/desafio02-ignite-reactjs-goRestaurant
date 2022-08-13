@@ -15,7 +15,7 @@ export function Header({ openModal }: HeaderProps) {
         <img src={logoImg} alt="GoRestaurant" />
         <nav>
           <div>
-            <button type="button" onClick={openModal}>
+            <button type="button" onClick={openModal} data-testid="button-add-food">
               <div className="text">Novo prato</div>
               <div className="icon">
                 <FiPlusSquare size={24} />

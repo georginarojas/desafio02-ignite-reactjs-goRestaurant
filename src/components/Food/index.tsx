@@ -17,7 +17,7 @@ export function Food({
   handleToggleAvailable,
 }: FoodProps) {
   return (
-    <Container available={food.available}>
+    <Container available={food.available} data-testid='food-box'>
       <header>
         <img src={food.image} alt={food.name} />
       </header>
@@ -51,7 +51,7 @@ export function Food({
         </div>
 
         <div className="availability-container">
-          <p>{food.available ? "Disponível" : "Indiponível"}</p>
+          <p data-testid={`text-availability-${food.id}`}>{food.available ? "Disponível" : "Indiponível"}</p>
           <label htmlFor={`available-switch-${food.id}`} className="switch">
             <input
               id={`available-switch-${food.id}`}

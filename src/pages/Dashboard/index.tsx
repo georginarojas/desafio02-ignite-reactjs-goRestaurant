@@ -7,10 +7,10 @@ import { useFoods } from "../../hooks/useFoods";
 import { FoodFormat } from "../../types";
 import { FoodsContainer } from "./styles";
 
-export function Dashboard() {
+const  Dashboard = (): JSX.Element =>  {
   const {
-    foods,
     toggleAvailable,
+    foods,
     deleteFood,
     addFood,
     updateFood,
@@ -84,3 +84,5 @@ export function Dashboard() {
     </>
   );
 }
+
+export default Dashboard
