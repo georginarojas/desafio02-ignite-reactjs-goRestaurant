@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Food } from "../../components/Food";
 import { Header } from "../../components/Header";
 import { ModalAddFood } from "../../components/ModalAddFood";
@@ -10,7 +11,7 @@ import { FoodsContainer } from "./styles";
 const  Dashboard = (): JSX.Element =>  {
   const {
     toggleAvailable,
-    foods,
+    // foods,
     deleteFood,
     addFood,
     updateFood,
@@ -18,7 +19,9 @@ const  Dashboard = (): JSX.Element =>  {
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [editingFood, setEditingFood] = useState<FoodFormat>({} as FoodFormat);
+  let foods = useSelector((state: any) => state.foods.data) as FoodFormat[]
 
+  console.log("redux  Foods ", foods);
   // -- Toggle Modal Add Food
   function toggleModalAdd() {
     setIsOpenAdd(!isOpenAdd);

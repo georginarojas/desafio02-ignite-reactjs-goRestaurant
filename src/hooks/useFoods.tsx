@@ -8,6 +8,8 @@ import {
 import { api } from "../services/api";
 import { toast } from "react-toastify";
 import { FoodFormat } from "../types";
+import { useDispatch } from "react-redux";
+import { toggleAvailableState} from '../state-management/food/foodSlice'
 
 interface FoodsProviderProps {
   children: ReactNode;
@@ -35,6 +37,7 @@ export const FoodsContext = createContext<FoodsContextData>(
 
 export function FoodsProvider({ children }: FoodsProviderProps) {
   const [foods, setFoods] = useState<FoodFormat[]>([]);
+  const dispatch = useDispatch()
 
   useEffect(() => {
     api.get<FoodFormat[]>("foods").then((response) => setFoods(response.data));
@@ -54,10 +57,14 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
       if (!response.data) {
         throw new Error();
       }
+      // Using Redux
+      dispatch(toggleAvailableState(food.id));
 
       let index = foods.findIndex((el) => el.id === food.id);
       foods[index].available = !isAvailable;
       setFoods([...foods]);
+
+
     } catch {
       toast.error("Erro no edição do prato");
     }
