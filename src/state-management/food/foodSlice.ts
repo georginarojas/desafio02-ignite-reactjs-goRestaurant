@@ -6,15 +6,7 @@ interface FoodState {
 }
 
 const initialState: FoodState = {
-  data: [
-    {
-    "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png",
-    "name": "Camarão empanado",
-    "price": 69.69,
-    "description": "Comida Bahiana",
-    "available": true,
-    "id": 0
-  }],
+  data: [],
 };
 
 export const foodSlice = createSlice({
@@ -25,9 +17,12 @@ export const foodSlice = createSlice({
       let index = state.data.findIndex((el) => el.id === action.payload);
       state.data[index].available = !state.data[index].available;
     },
+    setFoodList: (state, action: PayloadAction<FoodFormat[]>) => {
+      state.data = action.payload;
+    },
   },
 });
 
-export const { toggleAvailableState } = foodSlice.actions;
+export const { toggleAvailableState, setFoodList } = foodSlice.actions;
 
 export default foodSlice.reducer;

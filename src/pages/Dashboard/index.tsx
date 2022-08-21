@@ -5,6 +5,7 @@ import { Header } from "../../components/Header";
 import { ModalAddFood } from "../../components/ModalAddFood";
 import { ModalEditFood } from "../../components/ModalEditFood";
 import { useFoods } from "../../hooks/useFoods";
+import { RootState } from "../../state-management/store";
 import { FoodFormat } from "../../types";
 import { FoodsContainer } from "./styles";
 
@@ -19,7 +20,7 @@ const  Dashboard = (): JSX.Element =>  {
   const [isOpenAdd, setIsOpenAdd] = useState(false);
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [editingFood, setEditingFood] = useState<FoodFormat>({} as FoodFormat);
-  let foods = useSelector((state: any) => state.foods.data) as FoodFormat[]
+  let foods = useSelector((state: RootState) => state.foods.data) as FoodFormat[]
 
   console.log("redux  Foods ", foods);
   // -- Toggle Modal Add Food
