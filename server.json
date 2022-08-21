@@ -1,6 +1,14 @@
 {
   "foods": [
     {
+      "image": "https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png",
+      "name": "Camarão empanado",
+      "price": 69.69,
+      "description": "Comida Bahiana",
+      "available": false,
+      "id": 0
+    },
+    {
       "id": 1,
       "name": "Ao molho",
       "description": "Macarrão ao molho branco, fughi e cheiro verde das montanhas",
