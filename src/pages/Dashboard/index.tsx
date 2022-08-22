@@ -22,7 +22,6 @@ const  Dashboard = (): JSX.Element =>  {
   const [editingFood, setEditingFood] = useState<FoodFormat>({} as FoodFormat);
   let foods = useSelector((state: RootState) => state.foods.data) as FoodFormat[]
 
-  console.log("redux  Foods ", foods);
   // -- Toggle Modal Add Food
   function toggleModalAdd() {
     setIsOpenAdd(!isOpenAdd);
