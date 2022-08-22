@@ -12,7 +12,8 @@ import { useDispatch } from "react-redux";
 import {
   changeStatus,
   setFoodList,
-  removeFood
+  removeFood,
+  createFood
 } from "../state-management/food/foodSlice";
 
 interface FoodsProviderProps {
@@ -83,7 +84,9 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
       if (!response) {
         throw new Error();
       }
+      // Using Redux
       dispatch(removeFood(foodId));
+
       let newFoods = foods.filter((food) => food.id !== foodId);
       setFoods(newFoods);
     } catch {
@@ -101,6 +104,9 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
       if (!response) {
         throw new Error();
       }
+      // Using Redux
+      dispatch(createFood(response.data))
+      
       setFoods([...foods, response.data]);
     } catch {
       toast.error("Erro na adição de um novo prato");

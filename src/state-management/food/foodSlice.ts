@@ -22,10 +22,13 @@ export const foodSlice = createSlice({
     },
     removeFood: (state, action: PayloadAction<number>) => {
       state.data = state.data.filter((food) => food.id !== action.payload)
+    },
+    createFood: (state, action: PayloadAction<FoodFormat>) => {
+      state.data = [...state.data, action.payload]
     }
   },
 });
 
-export const { changeStatus, setFoodList, removeFood } = foodSlice.actions;
+export const { changeStatus, setFoodList, removeFood, createFood} = foodSlice.actions;
 
 export default foodSlice.reducer;
