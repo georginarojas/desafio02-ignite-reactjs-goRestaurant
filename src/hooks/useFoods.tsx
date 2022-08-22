@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import {
   changeStatus,
   setFoodList,
+  removeFood
 } from "../state-management/food/foodSlice";
 
 interface FoodsProviderProps {
@@ -82,6 +83,7 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
       if (!response) {
         throw new Error();
       }
+      dispatch(removeFood(foodId));
       let newFoods = foods.filter((food) => food.id !== foodId);
       setFoods(newFoods);
     } catch {
