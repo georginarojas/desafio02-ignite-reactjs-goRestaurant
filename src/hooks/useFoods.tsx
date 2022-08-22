@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { FoodFormat } from "../types";
 import { useDispatch } from "react-redux";
 import {
-  toggleAvailableState,
+  changeStatus,
   setFoodList,
 } from "../state-management/food/foodSlice";
 
@@ -47,6 +47,7 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
       setFoods(response.data);
       dispatch(setFoodList(response.data));
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // -- Toggle Available --
@@ -64,7 +65,7 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
         throw new Error();
       }
       // Using Redux
-      dispatch(toggleAvailableState(food.id));
+      dispatch(changeStatus(food.id));
 
       let index = foods.findIndex((el) => el.id === food.id);
       foods[index].available = !isAvailable;

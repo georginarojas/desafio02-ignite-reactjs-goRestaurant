@@ -13,7 +13,7 @@ export const foodSlice = createSlice({
   name: "foods",
   initialState,
   reducers: {
-    toggleAvailableState: (state, action: PayloadAction<number>) => {
+    changeStatus: (state, action: PayloadAction<number>) => {
       let index = state.data.findIndex((el) => el.id === action.payload);
       state.data[index].available = !state.data[index].available;
     },
@@ -23,6 +23,6 @@ export const foodSlice = createSlice({
   },
 });
 
-export const { toggleAvailableState, setFoodList } = foodSlice.actions;
+export const { changeStatus, setFoodList } = foodSlice.actions;
 
 export default foodSlice.reducer;
