@@ -13,7 +13,8 @@ import {
   changeStatus,
   setFoodList,
   removeFood,
-  createFood
+  createFood,
+  editFood
 } from "../state-management/food/foodSlice";
 
 interface FoodsProviderProps {
@@ -106,7 +107,7 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
       }
       // Using Redux
       dispatch(createFood(response.data))
-      
+
       setFoods([...foods, response.data]);
     } catch {
       toast.error("Erro na adição de um novo prato");
@@ -120,6 +121,9 @@ export function FoodsProvider({ children }: FoodsProviderProps) {
       if (!response) {
         throw new Error();
       }
+      // Using Redux
+      dispatch(editFood(food))
+      
       let index = foods.findIndex((el) => el.id === food.id);
       foods[index] = food;
       setFoods([...foods]);

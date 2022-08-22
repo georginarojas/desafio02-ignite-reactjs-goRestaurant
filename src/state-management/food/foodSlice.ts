@@ -25,10 +25,14 @@ export const foodSlice = createSlice({
     },
     createFood: (state, action: PayloadAction<FoodFormat>) => {
       state.data = [...state.data, action.payload]
+    },
+    editFood: (state, action: PayloadAction<FoodFormat>) => {
+      let index = state.data.findIndex((el) => el.id === action.payload.id);
+      state.data[index] = action.payload
     }
   },
 });
 
-export const { changeStatus, setFoodList, removeFood, createFood} = foodSlice.actions;
+export const { changeStatus, setFoodList, removeFood, createFood, editFood} = foodSlice.actions;
 
 export default foodSlice.reducer;
